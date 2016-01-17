@@ -7,12 +7,7 @@ from collections import defaultdict
 import time_numpy
 import time_scipy
 import time_theano
-
-import six
-if six.PY2:
-    from time import time as perf_counter
-else:
-    from time import perf_counter
+from time import time as perf_counter
 
 
 def timeit(setup_func, *setup_args, **setup_kwargs):
@@ -32,30 +27,23 @@ def timeit(setup_func, *setup_args, **setup_kwargs):
     return runtime
 
 
-def run():
+def run(tests):
+    """
+    Runs the given tests
 
-    tests = {
-        'numpy': [
-            (time_numpy.dot, 4000, 2000, 3000),
-            (time_numpy.dot, 5000, 5000, 5000),
-            (time_numpy.eig, 1000),
-            (time_numpy.eig, 2000),
-            (time_numpy.svd, 1000, 2000),
-        ],
+    Parameters
+    ----------
+    tests : dict
+        Each key is a name/identifier, the value is a tuple with a setup function
+        as the first item and any arguments as the next items
 
-        'scipy': [
-            (time_scipy.cholesky, 1000),
-            (time_scipy.cholesky, 2000),
-            (time_scipy.eig, 1000),
-            (time_scipy.eig, 2000),
-            (time_scipy.svd, 1000, 2000),
-        ],
+    Returns
+    -------
+    results : dict
+        A dictionary with name:function as keys and a list of runtimes in
+        seconds for the different arguments in tests as a value
 
-        'theano': [
-            (time_theano.exp, 100000),
-            (time_theano.exp, 1000000),
-        ]
-    }
+    """
 
     test_results = defaultdict(list)
 
@@ -67,3 +55,36 @@ def run():
             test_results[key].append(timeit(func, *args))
 
     return test_results
+
+
+if __name__ == '__main__':
+
+    tests = {
+        'numpy': [
+            (time_numpy.dot, 4000, 2000, 3000),
+            (time_numpy.dot, 5000, 5000, 5000),
+            (time_numpy.eig, 1000),
+            (time_numpy.eig, 2000),
+            (time_numpy.eig, 5000),
+            (time_numpy.svd, 1000, 2000),
+            (time_numpy.svd, 2000, 5000),
+        ],
+
+        'scipy': [
+            (time_scipy.cholesky, 1000),
+            (time_scipy.cholesky, 2000),
+            (time_scipy.cholesky, 5000),
+            (time_scipy.eig, 1000),
+            (time_scipy.eig, 2000),
+            (time_scipy.eig, 5000),
+            (time_scipy.svd, 1000, 2000),
+            (time_scipy.svd, 2000, 5000),
+        ],
+
+        'theano': [
+            (time_theano.exp, 100000),
+            (time_theano.exp, 1000000),
+        ]
+    }
+
+    results = run(tests)
