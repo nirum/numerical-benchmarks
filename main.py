@@ -8,6 +8,7 @@ import time_numpy
 import time_scipy
 import time_theano
 from time import time as perf_counter
+import json
 
 
 def timeit(setup_func, *setup_args, **setup_kwargs):
@@ -88,3 +89,7 @@ if __name__ == '__main__':
     }
 
     results = run(tests)
+
+    # save?
+    with open('results.json', 'w') as f:
+        f.write(json.dumps(results))
