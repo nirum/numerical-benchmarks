@@ -1,6 +1,10 @@
 # Numerical benchmarks for scientific python
 
-see `main.py`
+## Usage
+
+Simply run `python main.py myfile`, results will be stored in `myfile.json`
+
+(see `main.py` for more details)
 
 ## Requirements
 - Python 3.4 or 3.5
