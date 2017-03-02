@@ -1,14 +1,14 @@
 """
 Speed tests for numerical computing in python
-
 """
-
+import argparse
+import json
 from collections import defaultdict
+from time import time as perf_counter
+
 import time_numpy
 import time_scipy
 import time_theano
-from time import time as perf_counter
-import json
 
 
 def timeit(setup_func, *setup_args, **setup_kwargs):
@@ -60,6 +60,10 @@ def run(tests):
 
 if __name__ == '__main__':
 
+    parser = argparse.ArgumentParser(description='Benchmark a suite of numpy, scipy, and theano functions.')
+    parser.add_argument('filename', type=str, default='results', nargs='?', help='filename for saving json results')
+    args = parser.parse_args()
+
     tests = {
         'numpy': [
             (time_numpy.dot, 4000, 2000, 3000),
@@ -90,6 +94,8 @@ if __name__ == '__main__':
 
     results = run(tests)
 
-    # save?
-    with open('results.json', 'w') as f:
+    # save
+    filename = args.filename + '.json'
+    with open(filename, 'w') as f:
         f.write(json.dumps(results))
+        print('>> Saved results to {}'.format(filename))
