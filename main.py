@@ -8,7 +8,6 @@ from time import time as perf_counter
 
 import time_numpy
 import time_scipy
-import time_theano
 
 
 def timeit(setup_func, *setup_args, **setup_kwargs):
@@ -60,7 +59,7 @@ def run(tests):
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='Benchmark a suite of numpy, scipy, and theano functions.')
+    parser = argparse.ArgumentParser(description='Benchmark a suite of numpy, scipy functions.')
     parser.add_argument('filename', type=str, default='results', nargs='?', help='filename for saving json results')
     args = parser.parse_args()
 
@@ -86,10 +85,6 @@ if __name__ == '__main__':
             (time_scipy.svd, 2000, 5000),
         ],
 
-        'theano': [
-            (time_theano.exp, 100000),
-            (time_theano.exp, 1000000),
-        ]
     }
 
     results = run(tests)
