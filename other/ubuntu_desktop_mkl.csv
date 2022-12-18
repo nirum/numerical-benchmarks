@@ -1,0 +1,10 @@
+language,blas,benchmark,time
+python,mkl,builtin_sum,0.0203906361199995
+python,mkl,custom_sum,0.08573474329999727
+python,mkl,numpy_sum,0.0022575148399999988
+python,mkl,mat_mult,0.5975981783333472
+python,mkl,cholesky,0.048869830600000344
+python,mkl,svd,1.1064696299999923
+python,mkl,det,0.0007799068009999814
+python,mkl,solve,0.018943423740000753
+python,mkl,lstsqr,0.23056273800000326
