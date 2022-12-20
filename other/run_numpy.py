@@ -5,7 +5,7 @@ import numpy as np
 
 if hasattr(np.__config__, "openblas_info"):
     BLAS = "openblas"
-elif np.__config__.blas_mkl_info:
+elif hasattr(np.__config__, "blas_mkl_info"):
     BLAS = "mkl"
 else:
     BLAS = "unknown"

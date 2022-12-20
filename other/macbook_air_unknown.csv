@@ -1,0 +1,10 @@
+language,blas,benchmark,time
+python,unknown,builtin_sum,0.0254185766800947
+python,unknown,custom_sum,0.14903870829948573
+python,unknown,numpy_sum,0.0018825449999712873
+python,unknown,mat_mult,2.4111128609996135
+python,unknown,cholesky,0.20328029160009464
+python,unknown,svd,7.001891653000105
+python,unknown,det,0.0023442626660034873
+python,unknown,solve,0.07469324250007048
+python,unknown,lstsqr,1.120199641599902
